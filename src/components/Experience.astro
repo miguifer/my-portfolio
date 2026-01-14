@@ -1,4 +1,6 @@
 ---
+import Enlace from "../components/Enlace.astro";
+
 const startDate = new Date("2025-03-01");
 const now = new Date();
 const diffTime = now - startDate;
@@ -15,4 +17,13 @@ const timeString =
       : `${days} días`;
 ---
 
-<p class="pt-2 text-1xl text-center font-base" id="experiencia"><strong>Experiencia:</strong> {timeString}</p>
+<p class="pt-2 text-1xl text-center font-base flex flex-row justify-center items-center gap-2" id="experiencia">
+  <strong>experiencia </strong>
+  {timeString}
+
+  <Enlace
+    image="/linkedin-svgrepo-com.svg"
+    link="https://www.linkedin.com/in/miguel-fern%C3%A1ndez-fernandez/"
+    size={20}
+  />
+</p>

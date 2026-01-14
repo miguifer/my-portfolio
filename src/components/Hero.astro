@@ -5,7 +5,7 @@ import Enlace from "../components/Enlace.astro";
 ---
 
 <section
-  class="max-w-200 md:h-screen m-auto flex md:gap-10 items-center flex-col sm:justify-center md:flex-row"
+  class="max-w-200 md:h-screen pt-10 pb-20 md:pb-0 md:pt-0 m-auto flex md:gap-10 items-center flex-col sm:justify-center md:flex-row"
 >
   <div class="flex flex-1 flex-col gap-5 justify-center p-4 md:p-0">
     <h2 class="text-5xl font-bold font-base">Miguel <br />Fernández</h2>
@@ -16,8 +16,11 @@ import Enlace from "../components/Enlace.astro";
       > y
       <strong>mejorar</strong> mis habilidades constantemente.
     </p>
-    <div>
-      <Enlace />
+    <div class="flex flex-row gap-2">
+      <Enlace
+        image="/github-142-svgrepo-com.svg"
+        link="https://github.com/miguifer/"
+      />
     </div>
   </div>
   <div class="">

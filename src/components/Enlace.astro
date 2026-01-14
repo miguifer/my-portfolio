@@ -1,3 +1,18 @@
 ---
+export interface Props {
+  image: string;
+  link: string;
+  size?: number;
+}
 
+const { image, link } = Astro.props;
 ---
+
+<a href={link} class="cursor-pointer">
+  <img
+    class="hover:rotate-12 transition-transform duration-300"
+    src={image}
+    alt="Enlace"
+    style={`width: ${Astro.props.size || 28}px; height: ${Astro.props.size || 28}px;`}
+  />
+</a>
