@@ -1,0 +1,27 @@
+---
+import Character from "../components/Character.astro";
+import Experience from "../components/Experience.astro";
+import Enlace from "../components/Enlace.astro";
+---
+
+<section
+  class="max-w-200 md:h-screen m-auto flex md:gap-10 items-center flex-col sm:justify-center md:flex-row"
+>
+  <div class="flex flex-1 flex-col gap-5 justify-center p-4 md:p-0">
+    <h2 class="text-5xl font-bold font-base">Miguel <br />Fernández</h2>
+    <p class="text-xl font-base">
+      Soy un <strong>desarrollador web</strong> apasionado que se especializa en crear
+      soluciones efectivas y creativas para problemas complejos. Me encanta <strong
+        >aprender</strong
+      > y
+      <strong>mejorar</strong> mis habilidades constantemente.
+    </p>
+    <div>
+      <Enlace />
+    </div>
+  </div>
+  <div class="">
+    <Character />
+    <Experience />
+  </div>
+</section>

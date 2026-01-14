@@ -1,6 +1,5 @@
 ---
-import Character from "../components/Character.astro";
-import Experience from "../components/Experience.astro";
+import Hero from "../components/Hero.astro";
 import "../styles/global.css";
 ---
 
@@ -13,11 +12,8 @@ import "../styles/global.css";
     <title>Astro</title>
   </head>
   <body>
-    <main>
-      <Character />
-      <div>
-        <Experience />
-      </div>
+    <main class="w-screen h-screen flex align-middle justify-center">
+      <Hero />
     </main>
   </body>
 </html>
