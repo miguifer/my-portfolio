@@ -1,0 +1,52 @@
+---
+import Proyecto from "../components/Proyecto.astro";
+
+interface Tecnologia {
+  nombre: string;
+  logo: string;
+  url: string;
+}
+
+interface ProyectoData {
+  titulo: string;
+  descripcion: string;
+  repositorio?: string;
+  demo?: string;
+  imagen?: string;
+  tecnologias: Tecnologia[];
+  enDesarrollo?: boolean;
+}
+
+const proyectos: ProyectoData[] = [
+  {
+    titulo: "Afipiti",
+    descripcion: "Aplicación web desarrollada con <strong>Next.js</strong>, integrada con <strong>Sanity</strong> como sistema de gestión de contenido headless.",
+    repositorio: "https://github.com/miguifer/afipiti",
+    demo: "https://afipiti.vercel.app/",
+    tecnologias: [
+      { nombre: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/000000", url: "https://nextjs.org" },
+      { nombre: "Sanity", logo: "https://cdn.simpleicons.org/sanity/f03e2f", url: "https://sanity.io" },
+      { nombre: "Tailwind CSS", logo: "https://cdn.simpleicons.org/tailwindcss/06b6d4", url: "https://tailwindcss.com" },
+      { nombre: "Resend", logo: "https://cdn.simpleicons.org/resend/000000", url: "https://resend.com" },
+    ],
+    enDesarrollo: true,
+  },
+];
+---
+
+<section id="proyectos" class="max-w-200 min-h-screen pt-10 pb-20 md:pb-0 md:pt-0 m-auto flex flex-col justify-center p-4 md:p-0">
+  <h2 class="text-5xl font-bold font-base mb-10">Proyectos</h2>
+  <div class="flex flex-col gap-8">
+    {proyectos.map((proyecto) => (
+      <Proyecto
+        titulo={proyecto.titulo}
+        descripcion={proyecto.descripcion}
+        repositorio={proyecto.repositorio}
+        demo={proyecto.demo}
+        imagen={proyecto.imagen}
+        tecnologias={proyecto.tecnologias}
+        enDesarrollo={proyecto.enDesarrollo}
+      />
+    ))}
+  </div>
+</section>

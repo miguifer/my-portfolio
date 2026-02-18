@@ -10,3 +10,18 @@
   --font-base: "Rubik", sans-serif;
   --color-red: #f93634;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-red);
+  border-radius: 0px;
+}
