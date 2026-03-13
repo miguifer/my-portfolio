@@ -10,6 +10,7 @@ interface Props {
   descripcion: string;
   repositorio?: string;
   demo?: string | string[];
+  imagenes?: string | string[];
   tecnologias?: Tecnologia[];
   enDesarrollo?: boolean;
 }
@@ -19,6 +20,7 @@ const {
   descripcion,
   repositorio,
   demo,
+  imagenes,
   tecnologias = [],
   enDesarrollo = false,
 } = Astro.props;
@@ -27,13 +29,13 @@ const {
 <div class="transition-colors">
   <div class="flex flex-col md:flex-row gap-10">
     {
-      demo && (
+      imagenes && (
         <div class="w-full md:w-1/2 lg:w-3/5">
           <div class="relative w-full h-64 md:h-80 rounded-lg overflow-hidden border border-gray-300 bg-white">
-            {Array.isArray(demo) ? (
+            {Array.isArray(imagenes) ? (
               <div class="carousel relative w-full h-full" data-autoplay="3000">
                 <div class="carousel-track flex h-full transition-transform duration-500 ease-in-out">
-                  {demo.map((img, index) => (
+                  {imagenes.map((img, index) => (
                     <img
                       src={img}
                       alt={`${titulo} demo ${index + 1}`}
@@ -48,14 +50,14 @@ const {
                   <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" /></svg>
                 </button>
                 <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-                  {demo.map((_, index) => (
+                  {imagenes.map((_, index) => (
                     <button type="button" class={`w-2.5 h-2.5 rounded-full transition-colors ${index === 0 ? "bg-white" : "bg-white/50"}`} data-index={index} aria-label={`Ir a imagen ${index + 1}`} />
                   ))}
                 </div>
               </div>
             ) : (
               <img
-                src={demo}
+                src={imagenes}
                 alt={`${titulo} demo`}
                 class="w-full h-full object-cover"
               />
@@ -66,7 +68,7 @@ const {
     }
 
     <div
-      class={`w-full ${demo ? "md:w-1/2 lg:w-2/5" : ""} flex flex-col justify-center`}
+      class={`w-full ${imagenes ? "md:w-1/2 lg:w-2/5" : ""} flex flex-col justify-center`}
     >
       <h3 class="text-2xl font-semibold font-base mb-1">{titulo}</h3>
       {

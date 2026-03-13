@@ -11,7 +11,8 @@ interface ProyectoData {
   titulo: string;
   descripcion: string;
   repositorio?: string;
-  demo?:  string | string[];
+  demo?:  string;
+  imagenes?:  string | string[];
   tecnologias: Tecnologia[];
   enDesarrollo?: boolean;
 }
@@ -21,7 +22,8 @@ const proyectos: ProyectoData[] = [
     titulo: "Afipiti",
     descripcion: "Aplicación web desarrollada con <strong>Next.js</strong>, integrada con <strong>Sanity</strong> como sistema de gestión de contenido headless.",
     repositorio: "https://github.com/miguifer/afipiti",
-    demo: ["/proyectos/afipiti/1.png", '/proyectos/afipiti/2.png'],
+    demo: "https://afipiti.com",
+    imagenes: ["/proyectos/afipiti/1.png", '/proyectos/afipiti/2.png'],
     tecnologias: [
       { nombre: "Next.js", logo: "next.svg", url: "https://nextjs.org" },
       { nombre: "Sanity", logo: "sanity.svg", url: "https://sanity.io" },
@@ -42,6 +44,7 @@ const proyectos: ProyectoData[] = [
         descripcion={proyecto.descripcion}
         repositorio={proyecto.repositorio}
         demo={proyecto.demo}
+        imagenes={proyecto.imagenes}
         tecnologias={proyecto.tecnologias}
         enDesarrollo={proyecto.enDesarrollo}
       />
