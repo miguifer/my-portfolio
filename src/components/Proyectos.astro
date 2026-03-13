@@ -11,8 +11,7 @@ interface ProyectoData {
   titulo: string;
   descripcion: string;
   repositorio?: string;
-  demo?: string;
-  imagen?: string;
+  demo?:  string | string[];
   tecnologias: Tecnologia[];
   enDesarrollo?: boolean;
 }
@@ -22,12 +21,12 @@ const proyectos: ProyectoData[] = [
     titulo: "Afipiti",
     descripcion: "Aplicación web desarrollada con <strong>Next.js</strong>, integrada con <strong>Sanity</strong> como sistema de gestión de contenido headless.",
     repositorio: "https://github.com/miguifer/afipiti",
-    demo: "https://afipiti.com/",
+    demo: ["/proyectos/afipiti/1.png", '/proyectos/afipiti/2.png'],
     tecnologias: [
-      { nombre: "Next.js", logo: "https://cdn.simpleicons.org/nextdotjs/000000", url: "https://nextjs.org" },
-      { nombre: "Sanity", logo: "https://cdn.simpleicons.org/sanity/f03e2f", url: "https://sanity.io" },
-      { nombre: "Tailwind CSS", logo: "https://cdn.simpleicons.org/tailwindcss/06b6d4", url: "https://tailwindcss.com" },
-      { nombre: "Resend", logo: "https://cdn.simpleicons.org/resend/000000", url: "https://resend.com" },
+      { nombre: "Next.js", logo: "next.svg", url: "https://nextjs.org" },
+      { nombre: "Sanity", logo: "sanity.svg", url: "https://sanity.io" },
+      { nombre: "Tailwind CSS", logo: "tailwind.svg", url: "https://tailwindcss.com" },
+      { nombre: "Resend", logo: "resend.svg", url: "https://resend.com" },
     ],
     enDesarrollo: true,
   },
@@ -43,7 +42,6 @@ const proyectos: ProyectoData[] = [
         descripcion={proyecto.descripcion}
         repositorio={proyecto.repositorio}
         demo={proyecto.demo}
-        imagen={proyecto.imagen}
         tecnologias={proyecto.tecnologias}
         enDesarrollo={proyecto.enDesarrollo}
       />
