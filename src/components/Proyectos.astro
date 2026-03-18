@@ -34,7 +34,7 @@ const proyectos: ProyectoData[] = [
   },
     {
       titulo: "Scrollvideo",
-      descripcion: "Plugin para WordPress que permite reproducir videos sincronizados con el scroll.<br><strong>Actualmente en proceso de aceptación por parte de WordPress para estar en su workshop.</strong>",
+      descripcion: "Plugin para WordPress que permite reproducir videos sincronizados con el scroll.<br><strong>En proceso de aceptación por parte de WordPress para aparecer en su workshop.</strong>",
       repositorio: "https://github.com/miguifer/scrollvideo",
       // demo: "https://wordpress.org/plugins/scroll-video/",
       tecnologias: [
@@ -49,16 +49,21 @@ const proyectos: ProyectoData[] = [
 <section id="proyectos" class="max-w-200 min-h-screen pt-16 pb-20 md:pb-0 md:pt-0 m-auto flex flex-col justify-center p-4 md:p-0">
   <h2 class="text-5xl font-bold font-base mb-10">Proyectos</h2>
   <div class="flex flex-col gap-8">
-    {proyectos.map((proyecto) => (
-      <Proyecto
-        titulo={proyecto.titulo}
-        descripcion={proyecto.descripcion}
-        repositorio={proyecto.repositorio}
-        demo={proyecto.demo}
-        imagenes={proyecto.imagenes}
-        tecnologias={proyecto.tecnologias}
-        enDesarrollo={proyecto.enDesarrollo}
-      />
+    {proyectos.map((proyecto, idx) => (
+      <>
+        <Proyecto
+          titulo={proyecto.titulo}
+          descripcion={proyecto.descripcion}
+          repositorio={proyecto.repositorio}
+          demo={proyecto.demo}
+          imagenes={proyecto.imagenes}
+          tecnologias={proyecto.tecnologias}
+          enDesarrollo={proyecto.enDesarrollo}
+        />
+        {idx < proyectos.length - 1 && (
+          <hr class="border-t border-gray-200 my-4 opacity-60" />
+        )}
+      </>
     ))}
   </div>
 </section>
