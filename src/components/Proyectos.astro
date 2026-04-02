@@ -13,6 +13,7 @@ interface ProyectoData {
   repositorio?: string;
   demo?:  string;
   imagenes?:  string | string[];
+  icono?: string;
   tecnologias: Tecnologia[];
   enDesarrollo?: boolean;
 }
@@ -34,14 +35,15 @@ const proyectos: ProyectoData[] = [
   },
     {
       titulo: "Scrollvideo",
-      descripcion: "Plugin para WordPress que permite reproducir videos sincronizados con el scroll.<br><strong>En proceso de aceptación por parte de WordPress para aparecer en su workshop.</strong>",
+      descripcion: "Plugin para WordPress que permite reproducir videos sincronizados con el scroll.",
       repositorio: "https://github.com/miguifer/scrollvideo",
-      // demo: "https://wordpress.org/plugins/scroll-video/",
+      demo: "https://wordpress.org/plugins/sleek-scroll-video/",
+      icono: "/proyectos/scrollvideo/icon.png",
       tecnologias: [
         { nombre: "WordPress", logo: "wordpress.svg", url: "https://wordpress.org" },
-        { nombre: "GSAP", logo: "gsap.svg", url: "https://greensock.com/gsap/" }
+        { nombre: "Apache Subversion", logo: "Apache_Subversion_logo.svg", url: "https://subversion.apache.org/" }
       ],
-      enDesarrollo: true,
+      enDesarrollo: false,
     },
 ];
 ---
@@ -57,6 +59,7 @@ const proyectos: ProyectoData[] = [
           repositorio={proyecto.repositorio}
           demo={proyecto.demo}
           imagenes={proyecto.imagenes}
+          icono={proyecto.icono}
           tecnologias={proyecto.tecnologias}
           enDesarrollo={proyecto.enDesarrollo}
         />
