@@ -3,16 +3,19 @@ export interface Props {
   image: string;
   link: string;
   size?: number;
+  alt?: string;
 }
 
-const { image, link } = Astro.props;
+const { image, link, alt } = Astro.props;
+const altText = alt || link.replace(/https?:\/\/([^/]+).*/, '$1');
 ---
 
-<a href={link} class="cursor-pointer">
+<a href={link} class="cursor-pointer" target="_blank" rel="noopener noreferrer">
   <img
     class="hover:rotate-12 transition-transform duration-300"
     src={image}
-    alt="Enlace"
-    style={`width: ${Astro.props.size || 28}px; height: ${Astro.props.size || 28}px;`}
+    alt={altText}
+    width={Astro.props.size || 28}
+    height={Astro.props.size || 28}
   />
 </a>

@@ -4,6 +4,11 @@ import Analytics from '@vercel/analytics/astro'
 import SpeedInsights from "@vercel/speed-insights/astro"
 import Proyectos from "../components/Proyectos.astro";
 import "../styles/global.css";
+
+const title = "Miguel Fernández - Desarrollador Web | Portfolio";
+const description = "Portfolio de Miguel Fernández, desarrollador web especializado en Next.js, WordPress, Sanity y Tailwind CSS. Descubre mis proyectos y experiencia.";
+const url = "https://miguifer.com/";
+const image = "/proyectos/afipiti/1.png";
 ---
 
 <html lang="es">
@@ -15,7 +20,42 @@ import "../styles/global.css";
     <SpeedInsights />
     <meta name="generator" content={Astro.generator} />
     <meta name="google-site-verification" content="W0uhnZleg-e21E5QbTvZyYukR8w1UkFtMl1B0nbkG2M" />
-    <title>Miguel Fernández - Portfolio</title>
+
+    <!-- SEO básico -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Miguel Fernández" />
+    <link rel="canonical" href={url} />
+    <meta name="theme-color" content="#f93634" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${url}${image}`} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Miguel Fernández Portfolio" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${url}${image}`} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Miguel Fernández",
+      "url": url,
+      "jobTitle": "Desarrollador Web",
+      "sameAs": [
+        "https://github.com/miguifer/",
+        "https://www.linkedin.com/in/miguel-fern%C3%A1ndez-fernandez/"
+      ],
+      "knowsAbout": ["Next.js", "WordPress", "Sanity", "Tailwind CSS", "Desarrollo Web"]
+    })} />
   </head>
   <body class="scroll-smooth overflow-x-hidden">
     <main class="w-full">
