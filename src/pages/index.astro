@@ -1,5 +1,6 @@
 ---
 import Hero from "../components/Hero.astro";
+import Analytics from '@vercel/analytics/astro'
 import Proyectos from "../components/Proyectos.astro";
 import "../styles/global.css";
 ---
@@ -9,6 +10,7 @@ import "../styles/global.css";
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="/favicon-32x32.png" />
     <meta name="viewport" content="width=device-width" />
+    <Analytics />
     <meta name="generator" content={Astro.generator} />
     <meta name="google-site-verification" content="W0uhnZleg-e21E5QbTvZyYukR8w1UkFtMl1B0nbkG2M" />
     <title>Miguel Fernández - Portfolio</title>
