@@ -1,0 +1,172 @@
+---
+interface Puesto {
+  titulo: string;
+  tipo: string;
+  inicio: Date;
+  fin?: Date;
+  actual?: boolean;
+}
+
+interface Empresa {
+  nombre: string;
+  ubicacion: string;
+  inicio: Date;
+  puestos: Puesto[];
+}
+
+const meses = [
+  "ene.",
+  "feb.",
+  "mar.",
+  "abr.",
+  "may.",
+  "jun.",
+  "jul.",
+  "ago.",
+  "sept.",
+  "oct.",
+  "nov.",
+  "dic.",
+];
+
+function calcularDuracion(inicio: Date, fin: Date): string {
+  let totalMeses =
+    (fin.getFullYear() - inicio.getFullYear()) * 12 +
+    (fin.getMonth() - inicio.getMonth());
+  if (fin.getDate() >= inicio.getDate()) totalMeses++;
+  const años = Math.floor(totalMeses / 12);
+  const mesesR = totalMeses % 12;
+  if (años > 0 && mesesR > 0)
+    return `${años} año${años > 1 ? "s" : ""} ${mesesR} mes${mesesR > 1 ? "es" : ""}`;
+  if (años > 0) return `${años} año${años > 1 ? "s" : ""}`;
+  return `${mesesR} mes${mesesR > 1 ? "es" : ""}`;
+}
+
+function formatFecha(fecha: Date): string {
+  return `${meses[fecha.getMonth()]} ${fecha.getFullYear()}`;
+}
+
+function formatPeriodo(puesto: Puesto): string {
+  const fin = puesto.actual ? new Date() : puesto.fin!;
+  const finLabel = puesto.actual ? "actualidad" : formatFecha(puesto.fin!);
+  const duracion = calcularDuracion(puesto.inicio, fin);
+  return `${formatFecha(puesto.inicio)} – ${finLabel} · ${duracion}`;
+}
+
+function duracionTotal(empresa: Empresa): string {
+  const ahora = new Date();
+  const fin = empresa.puestos.some((p) => p.actual)
+    ? ahora
+    : empresa.puestos.reduce(
+        (max, p) => (p.fin && p.fin > max ? p.fin : max),
+        empresa.inicio,
+      );
+  return calcularDuracion(empresa.inicio, fin);
+}
+
+const experiencias: Empresa[] = [
+  {
+    nombre: "Brandcode",
+    ubicacion: "Logroño, La Rioja, España · Presencial · Jornada completa",
+    inicio: new Date("2025-03-01"),
+    puestos: [
+      {
+        titulo: "Desarrollador de software",
+        tipo: "Jornada completa",
+        inicio: new Date("2025-07-01"),
+        actual: true,
+      },
+      {
+        titulo: "Desarrollador de software",
+        tipo: "Contrato de prácticas",
+        inicio: new Date("2025-03-01"),
+        fin: new Date("2025-07-01"),
+      },
+    ],
+  },
+];
+---
+
+<section
+  id="cv"
+  aria-label="Currículum"
+  class="max-w-200 min-h-screen pt-16 pb-20 md:pb-0 md:pt-0 m-auto flex flex-col justify-center p-4 md:p-0"
+>
+  <h2 class="text-5xl font-bold font-base mb-10">Experiencia</h2>
+
+  <div class="flex flex-col gap-8">
+    {
+      experiencias.map((empresa, idx) => (
+        <>
+          <div>
+            <h3 class="text-2xl font-bold font-base mb-1">{empresa.nombre}</h3>
+            <p class="text-sm text-gray-500 font-base mb-1">
+              {empresa.ubicacion}
+            </p>
+            <p class="text-base text-gray-500 font-base mb-5">
+              {duracionTotal(empresa)}
+            </p>
+
+            <div class="relative pl-5 border-l-2 border-red/30 flex flex-col gap-6">
+              {empresa.puestos.map((puesto) => (
+                <div class="relative pl-3">
+                  <span
+                    class={`absolute -left-[0.4375rem] top-2 w-3 h-3 rounded-full ${puesto.actual ? "bg-red-600" : "bg-red/40"}`}
+                  />
+                  <h4 class="font-semibold font-base text-lg">
+                    {puesto.titulo}
+                  </h4>
+                  <p class="text-sm text-gray-500 font-base">{puesto.tipo}</p>
+                  <p class="text-sm text-gray-400 font-base">
+                    {formatPeriodo(puesto)}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          {idx < experiencias.length - 1 && (
+            <hr class="border-t border-gray-200 my-4 opacity-60" />
+          )}
+        </>
+      ))
+    }
+
+    <!-- Ver CV button -->
+    <a
+      href="/cv.pdf"
+      class="flex flex-col items-start gap-1 text-black hover:text-red/80 transition-colors cursor-pointer"
+    >
+      <span class="text-1xl text-center font-base">Ver CV</span>
+      <svg
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="#000000"
+        class="w-6 h-6"
+        ><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"
+          ><title>ionicons-v5-q</title><polygon
+            points="32 192 256 64 480 192 256 320 32 192"
+            style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+          ></polygon><polyline
+            points="112 240 112 368 256 448 400 368 400 240"
+            style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+          ></polyline><line
+            x1="480"
+            y1="368"
+            x2="480"
+            y2="192"
+            style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+          ></line><line
+            x1="256"
+            y1="320"
+            x2="256"
+            y2="448"
+            style="fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+          ></line></g
+        ></svg
+      >
+    </a>
+  </div>
+</section>
