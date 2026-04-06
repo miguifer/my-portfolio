@@ -1,20 +1,8 @@
 ---
-import Enlace from "../components/Enlace.astro";
+import Enlace from "./Enlace.astro";
+import { calcularTiempoExperiencia } from "../utils/dates";
 
-const startDate = new Date("2025-03-01");
-const now = new Date();
-const diffTime = now - startDate;
-const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-const years = Math.floor(diffDays / 365);
-const months = Math.floor((diffDays % 365) / 30);
-const days = diffDays % 30;
-
-const timeString =
-  years > 0
-    ? `${years} años, ${months} meses`
-    : months > 0
-      ? `${months} meses, ${days} días`
-      : `${days} días`;
+const timeString = calcularTiempoExperiencia(new Date("2025-03-01"));
 ---
 
 <p class="pt-2 text-1xl text-center font-base flex flex-row justify-center items-center gap-2" id="experiencia">

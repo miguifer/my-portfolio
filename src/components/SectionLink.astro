@@ -1,0 +1,18 @@
+---
+import ChevronDownIcon from "./icons/ChevronDownIcon.astro";
+
+export interface Props {
+  href: string;
+  label: string;
+}
+
+const { href, label } = Astro.props;
+---
+
+<a
+  href={href}
+  class="absolute bottom-0 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-black hover:text-red/80 transition-colors cursor-pointer animate-bounce"
+>
+  <span class="text-1xl text-center font-base">{label}</span>
+  <ChevronDownIcon />
+</a>

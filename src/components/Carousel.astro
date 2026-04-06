@@ -1,0 +1,117 @@
+---
+import CarouselPrevIcon from "./icons/CarouselPrevIcon.astro";
+import CarouselNextIcon from "./icons/CarouselNextIcon.astro";
+
+export interface Props {
+  imagenes: string[];
+  titulo: string;
+  autoplay?: number;
+}
+
+const { imagenes, titulo, autoplay = 3000 } = Astro.props;
+---
+
+<div class="carousel relative w-full h-full" data-autoplay={autoplay.toString()}>
+  <div class="carousel-track flex h-full transition-transform duration-500 ease-in-out">
+    {imagenes.map((img, index) => (
+      <img
+        src={img}
+        alt={`${titulo} demo ${index + 1}`}
+        class="w-full h-full object-cover flex-shrink-0"
+      />
+    ))}
+  </div>
+  <button
+    type="button"
+    class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-8 h-8 flex items-center justify-center transition-colors"
+    aria-label="Anterior"
+  >
+    <CarouselPrevIcon />
+  </button>
+  <button
+    type="button"
+    class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full w-8 h-8 flex items-center justify-center transition-colors"
+    aria-label="Siguiente"
+  >
+    <CarouselNextIcon />
+  </button>
+  <div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+    {imagenes.map((_, index) => (
+      <button
+        type="button"
+        class={`w-2.5 h-2.5 rounded-full transition-colors ${index === 0 ? "bg-white" : "bg-white/50"}`}
+        data-index={index}
+        aria-label={`Ir a imagen ${index + 1}`}
+      />
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".carousel").forEach((carousel) => {
+    const track = carousel.querySelector<HTMLElement>(".carousel-track")!;
+    const slides = track.children.length;
+    const dots = carousel.querySelectorAll<HTMLElement>(
+      ".carousel-dots button",
+    );
+    const autoplayDelay = parseInt(carousel.dataset.autoplay || "3000");
+    let current = 0;
+    let interval: ReturnType<typeof setInterval>;
+
+    function goTo(index: number) {
+      current = ((index % slides) + slides) % slides;
+      track.style.transform = `translateX(-${current * 100}%)`;
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("bg-white", i === current);
+        dot.classList.toggle("bg-white/50", i !== current);
+      });
+    }
+
+    carousel.querySelector(".carousel-prev")!.addEventListener("click", () => {
+      goTo(current - 1);
+      resetAutoplay();
+    });
+
+    carousel.querySelector(".carousel-next")!.addEventListener("click", () => {
+      goTo(current + 1);
+      resetAutoplay();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        goTo(parseInt(dot.dataset.index || "0"));
+        resetAutoplay();
+      });
+    });
+
+    function resetAutoplay() {
+      clearInterval(interval);
+      interval = setInterval(() => goTo(current + 1), autoplayDelay);
+    }
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    carousel.addEventListener(
+      "touchstart",
+      (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        clearInterval(interval);
+      },
+      { passive: true },
+    );
+
+    carousel.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) goTo(current + 1);
+        else goTo(current - 1);
+      }
+      resetAutoplay();
+    });
+
+    interval = setInterval(() => goTo(current + 1), autoplayDelay);
+  });
+</script>

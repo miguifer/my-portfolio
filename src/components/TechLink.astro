@@ -1,0 +1,23 @@
+---
+import type { Tecnologia } from "../types";
+
+export interface Props {
+  tech: Tecnologia;
+}
+
+const { tech } = Astro.props;
+---
+
+<a
+  href={tech.url}
+  target="_blank"
+  rel="noopener noreferrer"
+  title={tech.nombre}
+  class="w-8 h-8 hover:scale-110 transition-transform"
+>
+  <img
+    src={tech.logo}
+    alt={tech.nombre}
+    class="w-full h-full object-contain"
+  />
+</a>
